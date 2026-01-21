@@ -162,10 +162,39 @@ async def create_lead(
             raise Exception("Insert failed")
             
         lead_id = result.data[0]['id']
-        
+
+        # --- 4. Meta Conversion API ---
+        try:
+            from api.meta_utils import send_conversion_event
+            # Get client info from request
+            client_ip = request.client.host
+            user_agent = request.headers.get('user-agent', '')
+            send_conversion_event(lead_record, client_ip, user_agent)
+        except Exception as e:
+            print(f"Meta CAPI failed: {e}")
+
+        # --- 5. CRM Webhook ---
+        webhook_url = os.getenv('CRM_WEBHOOK_URL')
+        if webhook_url:
+            # Format address
+            address = f"{city}, {zip_code}" if city and zip_code else (city or zip_code or "")
+            
+            # Prepare CRM payload
+            crm_payload = {
+                'campaign': campaign or '',
+                'email': email,
+                'telephone': phone,
+                'address': address,
+                'firstname': first_name,
+                'lastname': last_name,
+                'image': image_url or '',
+                'analyticsid': '', 
+                'age': str(age),
+                'gender': 'M' if gender == 'Male' else 'F',
+                'opt_in': 'true' if wants_assessment == 'true' else 'false'
             }
             
-            # Inline webhook sending logic to ensure robust error handling
+            # Inline webhook sending logic
             try:
                 import requests
                 headers = {
@@ -185,43 +214,40 @@ async def create_lead(
             except requests.exceptions.ConnectionError as e:
                 status = 'failed'
                 resp_text = f"Connection Error: {str(e)[:200]}"
-            except requests.exceptions.SSLError as e:
-                status = 'failed'
-                resp_text = f"SSL Error: {str(e)[:200]}"
             except Exception as e:
                 status = 'failed'
-                resp_text = f"Unexpected Error: {str(e)[:200]}"
+                resp_text = f"Error: {str(e)[:200]}"
             
+            # Update Webhook Status
             supabase.table('leads').update({
                 'webhook_sent': True,
                 'webhook_status': status,
                 'webhook_response': resp_text
             }).eq('id', lead_id).execute()
 
-            # 5. Send Email Notification
-            email_data = lead_record.copy()
-            email_data['campaign'] = campaign
-            # Map score and category from analysis_result if available
-            try:
-                analysis = json.loads(analysis_data)
-                email_data['score'] = analysis.get('suitability_score', 'N/A')
-                email_data['category'] = analysis.get('market_categorization', {}).get('primary', 'N/A')
-            except:
-                email_data['score'] = 'N/A'
-                email_data['category'] = 'N/A'
-            
-            # Send email in background (or inline for simplicity)
-            try:
-                print("Sending email notification...")
-                send_lead_email(email_data)
-            except Exception as e:
-                print(f"Error sending email: {e}")
-
         else:
             supabase.table('leads').update({
                 'webhook_status': 'not_configured',
                 'webhook_response': 'CRM_WEBHOOK_URL not set'
             }).eq('id', lead_id).execute()
+
+        # --- 6. Send Email Notification ---
+        email_data = lead_record.copy()
+        email_data['campaign'] = campaign
+        try:
+            analysis = json.loads(analysis_data)
+            email_data['score'] = analysis.get('suitability_score', 'N/A')
+            email_data['category'] = analysis.get('market_categorization', {}).get('primary', 'N/A')
+        except:
+            email_data['score'] = 'N/A'
+            email_data['category'] = 'N/A'
+        
+        try:
+            print("Sending email notification...")
+            from api.email_utils import send_lead_email
+            send_lead_email(email_data)
+        except Exception as e:
+            print(f"Error sending email: {e}")
             
         return {
             "status": "success",
