@@ -119,7 +119,7 @@ const Scanner = () => {
             </div>
 
             {/* Main Area */}
-            <div className="relative w-full min-h-[600px] md:min-h-0 md:aspect-video bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden group">
+            <div className="relative w-full min-h-[600px] md:min-h-0 md:aspect-video bg-pastel-card rounded-2xl border border-white/10 shadow-xl overflow-hidden group">
 
                 {/* IDLE STATE */}
                 {state === 'IDLE' && (
@@ -140,7 +140,7 @@ const Scanner = () => {
                             <Upload className="text-pastel-accent" size={40} />
                         </div>
                         <h3 className="text-xl sm:text-xl font-semibold mb-2 text-center">Upload A Clear Selfie</h3>
-                        <p className="text-gray-500 text-sm text-center">Get Your Instant AI Analysis Now!</p>
+                        <p className="text-pastel-muted text-sm text-center">Get Your Instant AI Analysis Now!</p>
                     </div>
                 )}
 
@@ -165,7 +165,7 @@ const Scanner = () => {
                         {/* Image Side */}
                         <div className="relative w-full md:w-1/3 h-64 md:h-full">
                             <img src={previewUrl} className="w-full h-full object-cover" alt="Analyzed" />
-                            <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded text-xs font-mono text-pastel-accent border border-pastel-accent/30 shadow-sm">
+                            <div className="absolute top-4 left-4 bg-pastel-card/90 px-3 py-1 rounded text-xs font-mono text-pastel-accent border border-pastel-accent/30 shadow-sm">
                                 {analysisResult.market_categorization?.primary?.toUpperCase() || 'ANALYZED'}
                             </div>
                         </div>
@@ -180,29 +180,29 @@ const Scanner = () => {
                                 </div>
                                 <div className="text-right">
                                     <div className="text-4xl font-bold text-pastel-accent">{analysisResult.suitability_score || 0}</div>
-                                    <div className="text-xs text-gray-500 uppercase tracking-wider">Suitability Score</div>
+                                    <div className="text-xs text-pastel-muted uppercase tracking-wider">Suitability Score</div>
                                 </div>
                             </div>
 
                             {/* Detailed Stats Grid */}
                             <div className="grid grid-cols-2 gap-4 mb-6">
-                                <div className="p-3 bg-white rounded-lg border border-pastel-muted/20 shadow-sm">
+                                <div className="p-3 bg-pastel-card rounded-lg border border-white/10 shadow-sm">
                                     <div className="text-xs text-pastel-muted font-semibold uppercase tracking-wider mb-1">Face Shape</div>
                                     <div className="font-semibold text-pastel-text">{analysisResult.face_geometry?.primary_shape || 'Analyzing...'}</div>
                                 </div>
-                                <div className="p-3 bg-white rounded-lg border border-pastel-muted/20 shadow-sm">
+                                <div className="p-3 bg-pastel-card rounded-lg border border-white/10 shadow-sm">
                                     <div className="text-xs text-pastel-muted font-semibold uppercase tracking-wider mb-1">Jawline</div>
                                     <div className="font-semibold text-pastel-text">{analysisResult.face_geometry?.jawline_definition || 'Analyzing...'}</div>
                                 </div>
                             </div>
 
-                            <div className="mb-6 p-4 bg-white rounded-lg border border-gray-200">
+                            <div className="mb-6 p-4 bg-pastel-card rounded-lg border border-white/10">
                                 <span className="text-xs text-pastel-accent uppercase font-bold tracking-wider">Structural Note</span>
                                 <p className="text-sm text-pastel-text mt-1 italic">"{analysisResult.face_geometry?.structural_note || 'N/A'}"</p>
                             </div>
 
                             {/* BLURRED SECTION (Gated Content) */}
-                            <div className="relative w-full rounded-xl overflow-hidden border border-gray-200 bg-white p-4">
+                            <div className="relative w-full rounded-xl overflow-hidden border border-white/10 bg-pastel-card p-4">
 
                                 <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
                                     <ScanFace size={18} className="text-pastel-accent" />
@@ -212,20 +212,20 @@ const Scanner = () => {
                                 {/* The content to blur */}
                                 <div className={`space-y-4 ${state === 'PREVIEW' ? 'blur-md filter select-none' : ''}`}>
                                     <div>
-                                        <h4 className="text-sm text-gray-400">Aesthetic Audit</h4>
+                                        <h4 className="text-sm text-pastel-muted">Aesthetic Audit</h4>
                                         <p className="text-sm mt-1">
                                             {analysisResult.aesthetic_audit?.lighting_quality || 'Unknown'} lighting detected.
                                             {analysisResult.aesthetic_audit?.technical_flaw && analysisResult.aesthetic_audit.technical_flaw !== "None" && ` Note: ${analysisResult.aesthetic_audit.technical_flaw}.`}
                                         </p>
                                     </div>
                                     <div>
-                                        <h4 className="text-sm text-gray-400">Market Rationale</h4>
+                                        <h4 className="text-sm text-pastel-muted">Market Rationale</h4>
                                         <p className="text-sm mt-1">
                                             {analysisResult.market_categorization?.rationale || 'Processing...'}
                                         </p>
                                     </div>
                                     <div>
-                                        <h4 className="text-sm text-gray-400">Scout Verdict</h4>
+                                        <h4 className="text-sm text-pastel-muted">Scout Verdict</h4>
                                         <p className="text-sm mt-1 font-semibold text-white">
                                             {analysisResult.scout_feedback || 'No feedback generated.'}
                                         </p>
@@ -236,7 +236,7 @@ const Scanner = () => {
                                 {state === 'PREVIEW' && (
                                     <>
                                         {!showApplyForm ? (
-                                            <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center z-10">
+                                            <div className="absolute inset-0 bg-pastel-card/80 backdrop-blur-[2px] flex flex-col items-center justify-center p-6 text-center z-10">
                                                 <div className="mb-4 text-pastel-accent">
                                                     <ScanFace size={48} strokeWidth={1.5} />
                                                 </div>
@@ -252,7 +252,7 @@ const Scanner = () => {
                                                 >
                                                     Apply Now
                                                 </button>
-                                                <p className="text-xs text-gray-400 mt-4">
+                                                <p className="text-xs text-pastel-muted mt-4">
                                                     Unlock your full scout report
                                                 </p>
                                             </div>
@@ -269,7 +269,7 @@ const Scanner = () => {
                             </div>
 
                             {/* {state === 'COMPLETE' && (
-                                <button onClick={reset} className="mt-4 self-end text-sm text-gray-400 hover:text-white flex items-center gap-2">
+                                <button onClick={reset} className="mt-4 self-end text-sm text-pastel-muted hover:text-white flex items-center gap-2">
                                     <X size={14} /> Scan Another Photo
                                 </button>
                             )} */}

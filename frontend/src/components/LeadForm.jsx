@@ -201,7 +201,7 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                 {onCancel && (
                     <button
                         onClick={onCancel}
-                        className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors p-2"
+                        className="absolute top-4 right-4 text-pastel-muted hover:text-white transition-colors p-2"
                         type="button"
                     >
                         <X size={24} />
@@ -215,7 +215,7 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                     <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pastel-text to-gray-400">
                         Unlock Full Report
                     </h2>
-                    <p className="text-gray-400 text-sm mt-2">
+                    <p className="text-pastel-muted text-sm mt-2">
                         Save your results and see your match score.
                     </p>
                 </div>
@@ -223,22 +223,22 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <label className="text-xs uppercase tracking-wider text-gray-500 font-semibold">First Name *</label>
+                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">First Name *</label>
                             <input
                                 type="text"
                                 required
-                                className="w-full bg-white/50 border border-pastel-muted/20 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
                                 placeholder="Jane"
                                 value={formData.first_name}
                                 onChange={e => setFormData({ ...formData, first_name: e.target.value })}
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Last Name *</label>
+                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Last Name *</label>
                             <input
                                 type="text"
                                 required
-                                className="w-full bg-white/50 border border-pastel-muted/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
                                 placeholder="Doe"
                                 value={formData.last_name}
                                 onChange={e => setFormData({ ...formData, last_name: e.target.value })}
@@ -248,21 +248,21 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                            <label className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Age *</label>
+                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Age *</label>
                             <input
                                 type="number"
                                 required
-                                className="w-full bg-white/50 border border-pastel-muted/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
                                 placeholder="25"
                                 value={formData.age}
                                 onChange={e => setFormData({ ...formData, age: e.target.value })}
                             />
                         </div>
                         <div className="space-y-2">
-                            <label className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Gender *</label>
+                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Gender *</label>
                             <select
                                 required
-                                className="w-full bg-white/50 border border-pastel-muted/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors appearance-none"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors appearance-none"
                                 value={formData.gender}
                                 onChange={e => setFormData({ ...formData, gender: e.target.value })}
                             >
@@ -274,13 +274,13 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Email Address *</label>
+                        <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Email Address *</label>
                         <div className="relative">
-                            <Mail className="absolute left-3 top-3.5 text-gray-500" size={18} />
+                            <Mail className="absolute left-3 top-3.5 text-pastel-muted" size={18} />
                             <input
                                 type="email"
                                 required
-                                className="w-full bg-white/50 border border-pastel-muted/10 rounded-lg py-3.5 pl-10 pr-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 pl-10 pr-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
                                 placeholder="jane@example.com"
                                 value={formData.email}
                                 onChange={e => setFormData({ ...formData, email: e.target.value })}
@@ -289,13 +289,13 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Phone Number *</label>
+                        <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Phone Number *</label>
                         <div className="relative">
-                            <Smartphone className="absolute left-3 top-3.5 text-gray-500" size={18} />
+                            <Smartphone className="absolute left-3 top-3.5 text-pastel-muted" size={18} />
                             <input
                                 type="tel"
                                 required
-                                className="w-full bg-white/50 border border-pastel-muted/10 rounded-lg py-3.5 pl-10 pr-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 pl-10 pr-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
                                 placeholder="(555) 000-0000"
                                 value={formData.phone}
                                 onChange={e => setFormData({ ...formData, phone: e.target.value })}
@@ -304,11 +304,11 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-wider text-gray-500 font-semibold">Zip Code *</label>
+                        <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Zip Code *</label>
                         <input
                             type="text"
                             required
-                            className="w-full bg-white/50 border border-pastel-muted/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                            className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
                             placeholder="10001"
                             value={formData.zip_code}
                             onChange={e => setFormData({ ...formData, zip_code: e.target.value })}

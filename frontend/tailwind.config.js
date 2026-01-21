@@ -7,11 +7,11 @@ export default {
     theme: {
         extend: {
             colors: {
-                'pastel-bg': '#e6e0d4',     // Even Darker Cream/Beige for contrast
-                'pastel-card': '#ffffff',   // White
-                'pastel-accent': '#D81B60', // High-Visibility Pink
-                'pastel-text': '#333333',   // Dark Charcoal
-                'pastel-muted': '#64748b',  // Slate Gray
+                'pastel-bg': '#121212',     // Rich Near-Black (OLED friendly)
+                'pastel-card': '#1E1E1E',   // Elevated Gray
+                'pastel-accent': '#FF2E63', // Glowing Coral/Pink (High Brightness for Dark Mode)
+                'pastel-text': '#FFFFFF',   // Pure White
+                'pastel-muted': '#A0A0A0',  // Silver/Light Gray
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],

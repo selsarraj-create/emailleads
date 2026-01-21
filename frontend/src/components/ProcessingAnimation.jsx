@@ -42,7 +42,7 @@ const ProcessingAnimation = ({ onComplete }) => {
             </div>
 
             {/* Text Animation */}
-            <div className="z-30 mt-32 md:mt-48 text-center bg-white/80 px-6 py-2 rounded-full backdrop-blur-md border border-white/20 shadow-lg">
+            <div className="z-30 mt-32 md:mt-48 text-center bg-pastel-card/80 px-6 py-2 rounded-full backdrop-blur-md border border-white/20 shadow-lg">
                 <AnimatePresence mode="wait">
                     <motion.p
                         key={textIndex}
