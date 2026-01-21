@@ -7,7 +7,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                'pastel-bg': '#f5f0e6',     // Darker Cream/Beige
+                'pastel-bg': '#e6e0d4',     // Even Darker Cream/Beige for contrast
                 'pastel-card': '#ffffff',   // White
                 'pastel-accent': '#D81B60', // High-Visibility Pink
                 'pastel-text': '#333333',   // Dark Charcoal
