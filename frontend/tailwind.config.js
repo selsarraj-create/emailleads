@@ -9,9 +9,9 @@ export default {
             colors: {
                 'pastel-bg': '#f5f0e6',     // Darker Cream/Beige
                 'pastel-card': '#ffffff',   // White
-                'pastel-accent': '#ffb7b2', // Pastel Rose
-                'pastel-text': '#4a4a4a',   // Dark Gray
-                'pastel-muted': '#888888',  // Muted Gray for secondary text
+                'pastel-accent': '#D81B60', // High-Visibility Pink
+                'pastel-text': '#333333',   // Dark Charcoal
+                'pastel-muted': '#64748b',  // Slate Gray
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],

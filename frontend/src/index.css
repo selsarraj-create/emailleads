@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 @layer utilities {
-  .glass-panel {
-    @apply bg-white/70 backdrop-blur-md border border-pastel-accent/20 shadow-xl;
-  }
+  @apply bg-white/80 backdrop-blur-md border border-pastel-muted/20 shadow-lg;
 }
 
 body {

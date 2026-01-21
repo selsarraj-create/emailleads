@@ -109,8 +109,8 @@ const Scanner = () => {
 
             {/* Header */}
             <div className="mb-6 sm:mb-8 text-center">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mb-2">
-                    10 Second <span className="text-pastel-accent">Model Scout</span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mb-2 text-pastel-text">
+                    10 Second <span className="text-pastel-accent font-bold">Model Scout</span>
                 </h1>
                 <div className="text-sm sm:text-base text-pastel-text space-y-1 font-medium">
                     <p>Could You Be A Model?</p>
@@ -186,13 +186,13 @@ const Scanner = () => {
 
                             {/* Detailed Stats Grid */}
                             <div className="grid grid-cols-2 gap-4 mb-6">
-                                <div className="p-3 bg-white rounded-lg border border-gray-200">
-                                    <div className="text-xs text-gray-500 mb-1">Face Shape</div>
-                                    <div className="font-medium">{analysisResult.face_geometry?.primary_shape || 'Analyzing...'}</div>
+                                <div className="p-3 bg-white rounded-lg border border-pastel-muted/20 shadow-sm">
+                                    <div className="text-xs text-pastel-muted font-semibold uppercase tracking-wider mb-1">Face Shape</div>
+                                    <div className="font-semibold text-pastel-text">{analysisResult.face_geometry?.primary_shape || 'Analyzing...'}</div>
                                 </div>
-                                <div className="p-3 bg-white/5 rounded-lg border border-white/5">
-                                    <div className="text-xs text-gray-500 mb-1">Jawline</div>
-                                    <div className="font-medium">{analysisResult.face_geometry?.jawline_definition || 'Analyzing...'}</div>
+                                <div className="p-3 bg-white rounded-lg border border-pastel-muted/20 shadow-sm">
+                                    <div className="text-xs text-pastel-muted font-semibold uppercase tracking-wider mb-1">Jawline</div>
+                                    <div className="font-semibold text-pastel-text">{analysisResult.face_geometry?.jawline_definition || 'Analyzing...'}</div>
                                 </div>
                             </div>
 
