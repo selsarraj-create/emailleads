@@ -53,6 +53,11 @@ def send_conversion_event(lead_data, client_ip, user_agent):
         ],
         "access_token": access_token
     }
+
+    # Add Test Event Code if available (for "Test Events" in Events Manager)
+    test_code = os.getenv('META_TEST_CODE') or os.getenv('VITE_META_TEST_CODE')
+    if test_code:
+        payload['test_event_code'] = test_code
     
     try:
         response = requests.post(url, json=payload)
