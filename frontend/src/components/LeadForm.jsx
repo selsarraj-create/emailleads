@@ -207,15 +207,24 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                         <X size={24} />
                     </button>
                 )}
-                {/* Decorative header */}
-                <div className="text-center mb-6">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-pastel-accent/20 mb-4 text-pastel-accent">
-                        <Lock size={24} />
-                    </div>
-                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pastel-text to-gray-400">
-                        Unlock Full Report
-                    </h2>
-                    <p className="text-pastel-muted text-sm mt-2">
+                return (
+                <div className="w-full h-full bg-pastel-card p-6 overflow-y-auto relative">
+                    <button
+                        onClick={onCancel}
+                        className="absolute top-4 right-4 p-2 text-pastel-muted hover:text-white transition-colors rounded-full hover:bg-white/10"
+                    >
+                        <X size={24} />
+                    </button>
+
+                    <div className="text-center mb-6">
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-pastel-accent/10 mb-4">
+                            <User className="text-pastel-accent" size={24} />
+                        </div>
+                        <h2 className="text-2xl font-bold text-white mb-2">Claim Your Spot</h2>
+                        <p className="text-pastel-muted text-sm">
+                            Enter your details below to schedule your assessment with a scout.
+                        </p>
+                    </div>        <p className="text-pastel-muted text-sm mt-2">
                         Save your results and see your match score.
                     </p>
                 </div>
