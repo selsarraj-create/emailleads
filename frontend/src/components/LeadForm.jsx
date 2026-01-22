@@ -195,23 +195,15 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
     };
 
     return (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/20 backdrop-blur-md overflow-y-auto h-full w-full p-4">
-            <div className="glass-panel w-full max-w-lg p-6 sm:p-8 rounded-2xl relative">
-                {/* Close Button */}
-                {onCancel && (
+        <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm overflow-y-auto">
+            <div className="min-h-full flex items-center justify-center p-4">
+                <div className="glass-panel w-full max-w-lg p-6 sm:p-8 rounded-2xl relative bg-pastel-card border border-white/10 shadow-2xl">
+
+                    {/* Close Button - Sticky to verify visibility or just absolute in relative container */}
                     <button
                         onClick={onCancel}
-                        className="absolute top-4 right-4 text-pastel-muted hover:text-white transition-colors p-2"
-                        type="button"
-                    >
-                        <X size={24} />
-                    </button>
-                )}
-                return (
-                <div className="w-full h-full bg-pastel-card p-6 overflow-y-auto relative">
-                    <button
-                        onClick={onCancel}
-                        className="absolute top-4 right-4 p-2 text-pastel-muted hover:text-white transition-colors rounded-full hover:bg-white/10"
+                        className="absolute top-4 right-4 p-2 text-pastel-muted hover:text-white transition-colors rounded-full hover:bg-white/10 z-10"
+                        aria-label="Close"
                     >
                         <X size={24} />
                     </button>
@@ -224,124 +216,121 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                         <p className="text-pastel-muted text-sm">
                             Enter your details below to schedule your assessment with a scout.
                         </p>
-                    </div>        <p className="text-pastel-muted text-sm mt-2">
-                        Save your results and see your match score.
-                    </p>
-                </div>
+                    </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">First Name *</label>
+                                <input
+                                    type="text"
+                                    required
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                    placeholder="Jane"
+                                    value={formData.first_name}
+                                    onChange={e => setFormData({ ...formData, first_name: e.target.value })}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Last Name *</label>
+                                <input
+                                    type="text"
+                                    required
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                    placeholder="Doe"
+                                    value={formData.last_name}
+                                    onChange={e => setFormData({ ...formData, last_name: e.target.value })}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Age *</label>
+                                <input
+                                    type="number"
+                                    required
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                    placeholder="25"
+                                    value={formData.age}
+                                    onChange={e => setFormData({ ...formData, age: e.target.value })}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Gender *</label>
+                                <select
+                                    required
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors appearance-none"
+                                    value={formData.gender}
+                                    onChange={e => setFormData({ ...formData, gender: e.target.value })}
+                                >
+                                    <option value="" disabled>Select</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Male">Male</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div className="space-y-2">
-                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">First Name *</label>
+                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Email Address *</label>
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-3.5 text-pastel-muted" size={18} />
+                                <input
+                                    type="email"
+                                    required
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 pl-10 pr-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                    placeholder="jane@example.com"
+                                    value={formData.email}
+                                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Phone Number *</label>
+                            <div className="relative">
+                                <Smartphone className="absolute left-3 top-3.5 text-pastel-muted" size={18} />
+                                <input
+                                    type="tel"
+                                    required
+                                    className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 pl-10 pr-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
+                                    placeholder="(555) 000-0000"
+                                    value={formData.phone}
+                                    onChange={e => setFormData({ ...formData, phone: e.target.value })}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Zip Code *</label>
                             <input
                                 type="text"
                                 required
                                 className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
-                                placeholder="Jane"
-                                value={formData.first_name}
-                                onChange={e => setFormData({ ...formData, first_name: e.target.value })}
+                                placeholder="10001"
+                                value={formData.zip_code}
+                                onChange={e => setFormData({ ...formData, zip_code: e.target.value })}
                             />
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Last Name *</label>
-                            <input
-                                type="text"
-                                required
-                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
-                                placeholder="Doe"
-                                value={formData.last_name}
-                                onChange={e => setFormData({ ...formData, last_name: e.target.value })}
-                            />
-                        </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Age *</label>
-                            <input
-                                type="number"
-                                required
-                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
-                                placeholder="25"
-                                value={formData.age}
-                                onChange={e => setFormData({ ...formData, age: e.target.value })}
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Gender *</label>
-                            <select
-                                required
-                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors appearance-none"
-                                value={formData.gender}
-                                onChange={e => setFormData({ ...formData, gender: e.target.value })}
-                            >
-                                <option value="" disabled>Select</option>
-                                <option value="Female">Female</option>
-                                <option value="Male">Male</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Email Address *</label>
-                        <div className="relative">
-                            <Mail className="absolute left-3 top-3.5 text-pastel-muted" size={18} />
-                            <input
-                                type="email"
-                                required
-                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 pl-10 pr-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
-                                placeholder="jane@example.com"
-                                value={formData.email}
-                                onChange={e => setFormData({ ...formData, email: e.target.value })}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Phone Number *</label>
-                        <div className="relative">
-                            <Smartphone className="absolute left-3 top-3.5 text-pastel-muted" size={18} />
-                            <input
-                                type="tel"
-                                required
-                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 pl-10 pr-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
-                                placeholder="(555) 000-0000"
-                                value={formData.phone}
-                                onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="space-y-2">
-                        <label className="text-xs uppercase tracking-wider text-pastel-muted font-semibold">Zip Code *</label>
-                        <input
-                            type="text"
-                            required
-                            className="w-full bg-white/5 border border-white/10 rounded-lg py-3.5 px-4 text-pastel-text text-base focus:outline-none focus:border-pastel-accent transition-colors"
-                            placeholder="10001"
-                            value={formData.zip_code}
-                            onChange={e => setFormData({ ...formData, zip_code: e.target.value })}
-                        />
-                    </div>
-
-                    {/* Checkbox Removed as per request
+                        {/* Checkbox Removed as per request
                     <div className="flex items-start space-x-3 pt-2">
                          ...
                     </div> */}
 
-                    {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+                        {error && <p className="text-red-400 text-sm text-center">{error}</p>}
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full mt-6 bg-pastel-accent hover:bg-red-300 text-white font-bold py-4 text-lg rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
-                    >
-                        {loading ? "Saving..." : "Reveal My Results"}
-                    </button>
-                </form>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full mt-6 bg-pastel-accent hover:bg-red-300 text-white font-bold py-4 text-lg rounded-lg transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
+                        >
+                            {loading ? "Saving..." : "Reveal My Results"}
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
-    );
+            );
 };
 
-export default LeadForm;
+            export default LeadForm;
