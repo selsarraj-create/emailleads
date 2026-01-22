@@ -116,8 +116,8 @@ const Scanner = () => {
                             onChange={(e) => handleFileSelect(e.target.files[0])}
                         />
 
-                        <p className="text-lg font-serif italic text-white/90 mb-8 text-center">
-                            "We&apos;re always looking for new faces to join us"
+                        <p className="text-lg font-serif italic text-white/90 mb-8 text-center px-6">
+                            We&apos;re always looking for <br className="block sm:hidden" /> new faces to join us
                         </p>
 
                         <div className="w-24 h-24 sm:w-20 sm:h-20 bg-pastel-accent/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
