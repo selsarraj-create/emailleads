@@ -214,7 +214,7 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                         </div>
                         <h2 className="text-2xl font-bold text-white mb-2">Claim Your Spot</h2>
                         <p className="text-pastel-muted text-sm">
-                            Enter your details below to schedule your assessment with a scout.
+                            Enter your details below if you'd like to start modeling
                         </p>
                     </div>
 
