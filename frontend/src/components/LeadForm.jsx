@@ -327,6 +327,9 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                         >
                             {loading ? "Saving..." : "Reveal My Results"}
                         </button>
+                        <p className="text-xs text-center text-pastel-muted mt-4">
+                            Talent Scouted is not an agency
+                        </p>
                     </form>
                 </div>
             </div>
