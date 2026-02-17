@@ -5,6 +5,7 @@ import LeadForm from './LeadForm';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { compressImage } from '../utils/imageUtils';
+import Testimonials from './Testimonials';
 
 // Use /api for production (Vercel), localhost for development
 const API_URL = import.meta.env.MODE === 'production' ? '/api' : 'http://localhost:8000';
@@ -258,6 +259,8 @@ const Scanner = () => {
                 )}
 
             </div>
+            {/* Testimonials Section */}
+            <Testimonials />
         </div>
     );
 };
