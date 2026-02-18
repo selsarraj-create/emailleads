@@ -328,7 +328,7 @@ async def test_webhook_connection():
     
     # Test payload
     test_payload = {
-        'campaign': '#TEST1M',
+        'campaign': '#NY4AB',
         'email': 'test@vercel-test.com',
         'telephone': '1234567890',
         'address': 'Test City, 12345',
