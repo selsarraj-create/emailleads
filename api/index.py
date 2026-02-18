@@ -229,23 +229,22 @@ async def create_lead(
             
         final_record = result.data[0]
         
-        # --- 4. Queue Background Tasks ---
-        # Get client info for Meta
+        # --- 4. Send Email Synchronously (Vercel kills background tasks) ---
+        try:
+            print("Sending email notification...")
+            send_lead_email(final_record)
+            print("Email sent successfully.")
+        except Exception as e:
+            print(f"Email sending failed: {e}")
+        
+        # --- 5. Queue non-critical tasks in background ---
         client_ip = request.client.host if request and request.client else "0.0.0.0"
         user_agent = request.headers.get('user-agent', '') if request else ""
-        
         background_tasks.add_task(process_lead_background, final_record, client_ip, user_agent)
             
         return {
             "status": "success",
             "lead_id": final_record['id'],
-            "message": "Lead saved successfully."
-        }
-
-            
-        return {
-            "status": "success",
-            "lead_id": lead_id,
             "message": "Lead saved successfully."
         }
 
