@@ -7,8 +7,8 @@ def send_lead_email(lead_data):
     Uses HTTP API instead of raw SMTP because Vercel blocks outbound SMTP ports.
     """
     api_key = os.getenv('SMTP2GO_API_KEY')
-    sender_email = os.getenv('SMTP_SENDER', 'leads@nycscouts.com')
-    recipient_email = os.getenv('LEAD_NOTIFICATION_EMAIL', 'asmarketingltd@gmail.com')
+    sender_email = os.getenv('SMTP_SENDER') or 'leads@nycscouts.com'
+    recipient_email = os.getenv('LEAD_NOTIFICATION_EMAIL') or 'asmarketingltd@gmail.com'
     
     if not api_key:
         print("SMTP2GO_API_KEY not set, skipping email.")

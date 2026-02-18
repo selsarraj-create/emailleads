@@ -320,8 +320,8 @@ async def test_email():
     try:
         payload = {
             "api_key": api_key,
-            "to": [os.getenv('LEAD_NOTIFICATION_EMAIL', 'asmarketingltd@gmail.com')],
-            "sender": os.getenv('SMTP_SENDER', 'leads@nycscouts.com'),
+            "to": [os.getenv('LEAD_NOTIFICATION_EMAIL') or 'asmarketingltd@gmail.com'],
+            "sender": os.getenv('SMTP_SENDER') or 'leads@nycscouts.com',
             "subject": "Test Email from Vercel",
             "text_body": "This is a test email to confirm SMTP2GO HTTP API works on Vercel."
         }
