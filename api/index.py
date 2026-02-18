@@ -116,12 +116,6 @@ def process_lead_background(lead_record: dict, client_ip: str, user_agent: str):
         except Exception as e:
             print(f"Failed to update webhook status: {e}")
 
-    # 3. Send Email Notification
-    try:
-        print("Sending background email notification...")
-        send_lead_email(lead_record)
-    except Exception as e:
-        print(f"Error sending background email: {e}")
 
 @app.post("/api/lead")
 async def create_lead(
