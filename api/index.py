@@ -308,6 +308,38 @@ async def retry_webhook(req: RetryRequest):
     except Exception as e:
          return JSONResponse(status_code=500, content={"error": str(e)})
 
+@app.get("/api/test_email")
+async def test_email():
+    """Test endpoint to verify email sending works from Vercel."""
+    import requests as req
+    api_key = os.getenv('SMTP2GO_API_KEY')
+    
+    if not api_key:
+        return {"status": "error", "message": "SMTP2GO_API_KEY env var not set"}
+    
+    try:
+        payload = {
+            "api_key": api_key,
+            "to": [os.getenv('LEAD_NOTIFICATION_EMAIL', 'asmarketingltd@gmail.com')],
+            "sender": os.getenv('SMTP_SENDER', 'leads@nycscouts.com'),
+            "subject": "Test Email from Vercel",
+            "text_body": "This is a test email to confirm SMTP2GO HTTP API works on Vercel."
+        }
+        
+        response = req.post(
+            "https://api.smtp2go.com/v3/email/send",
+            json=payload,
+            timeout=10
+        )
+        
+        return {
+            "status": "success" if response.status_code == 200 else "failed",
+            "smtp2go_status_code": response.status_code,
+            "smtp2go_response": response.json()
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
 @app.get("/api/test_webhook")
 async def test_webhook_connection():
     """

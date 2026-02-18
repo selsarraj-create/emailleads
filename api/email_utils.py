@@ -1,26 +1,24 @@
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 import os
+import requests
 
 def send_lead_email(lead_data):
     """
-    Send lead notification email via SMTP2GO
+    Send lead notification email via SMTP2GO HTTP API.
+    Uses HTTP API instead of raw SMTP because Vercel blocks outbound SMTP ports.
     """
-    # SMTP Configuration
-    smtp_server = "mail-eu.smtp2go.com"
-    smtp_port = 2525
-    smtp_username = os.getenv('SMTP_USERNAME', 'leadsnyc')
-    smtp_password = os.getenv('SMTP_PASSWORD', 'enQ3a3FuMHA1OTAw')
+    api_key = os.getenv('SMTP2GO_API_KEY')
     sender_email = os.getenv('SMTP_SENDER', 'leads@nycscouts.com')
     recipient_email = os.getenv('LEAD_NOTIFICATION_EMAIL', 'asmarketingltd@gmail.com')
     
+    if not api_key:
+        print("SMTP2GO_API_KEY not set, skipping email.")
+        return False
+    
     # Email subject: [Name] - [CampaignCode]
     campaign_code = lead_data.get('campaign', 'N/A')
-    
     subject = f"{lead_data.get('first_name', '')} {lead_data.get('last_name', '')} - {campaign_code}"
     
-    # Email body with all lead fields
+    # Email body
     body = f"""
 New Lead Submission
 
@@ -40,21 +38,28 @@ Submitted: {lead_data.get('created_at', '')}
 """
     
     try:
-        # Create message
-        message = MIMEMultipart()
-        message['From'] = sender_email
-        message['To'] = recipient_email
-        message['Subject'] = subject
-        message.attach(MIMEText(body, 'plain'))
+        payload = {
+            "api_key": api_key,
+            "to": [recipient_email],
+            "sender": sender_email,
+            "subject": subject,
+            "text_body": body
+        }
         
-        # Send email
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()  # Enable TLS
-            server.login(smtp_username, smtp_password)
-            server.send_message(message)
-            
-        print(f"Email sent successfully to {recipient_email}")
-        return True
+        response = requests.post(
+            "https://api.smtp2go.com/v3/email/send",
+            json=payload,
+            timeout=10
+        )
+        
+        result = response.json()
+        
+        if response.status_code == 200 and result.get("data", {}).get("succeeded", 0) > 0:
+            print(f"Email sent successfully to {recipient_email}")
+            return True
+        else:
+            print(f"SMTP2GO API error: {result}")
+            return False
         
     except Exception as e:
         print(f"Failed to send email: {str(e)}")
