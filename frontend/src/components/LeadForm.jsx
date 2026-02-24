@@ -83,6 +83,7 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
 
             // 2. Find Nearest City
             let nearestCity = null;
+            let nearestCityName = null;
             let minDistance = Infinity;
 
             for (const [city, data] of Object.entries(TARGET_CITIES)) {
@@ -90,6 +91,24 @@ const LeadForm = ({ analysisData, imageBlob, onSubmitSuccess, onCancel }) => {
                 if (distance < minDistance) {
                     minDistance = distance;
                     nearestCity = data.code;
+                    nearestCityName = city;
+                }
+            }
+
+            // Florida special rule: if nearest is Orlando or Miami,
+            // assign based on 50-mile boundary south of Orlando
+            if (nearestCityName === 'Orlando' || nearestCityName === 'Miami') {
+                const distFromOrlando = getDistanceFromLatLonInKm(
+                    userLat, userLon,
+                    TARGET_CITIES['Orlando'].lat, TARGET_CITIES['Orlando'].lon
+                );
+                const FIFTY_MILES_KM = 80.47; // 50 miles in km
+                const isSouthOfOrlando = userLat < TARGET_CITIES['Orlando'].lat;
+
+                if (isSouthOfOrlando && distFromOrlando > FIFTY_MILES_KM) {
+                    nearestCity = TARGET_CITIES['Miami'].code; // #FL4AB
+                } else {
+                    nearestCity = TARGET_CITIES['Orlando'].code; // #ORL4AB
                 }
             }
 
